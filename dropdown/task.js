@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const link = item.querySelector('.dropdown__link');
                 const selectedText = link.textContent;
                 dropdownValue.textContent = selectedText;
-                dropdownList.classList.remove('dropdown_list_active');
+                dropdownList.classList.remove('dropdown__list_active');
 
             });
         });
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.addEventListener('click', (event) => {
             if (!dropdownElement.contains(event.target)) {
-                dropdownList.classList.remove('dropdown_list_active');
+                dropdownList.classList.remove('dropdown__list_active');
             }
         });
     });
