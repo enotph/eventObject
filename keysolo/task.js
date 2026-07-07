@@ -25,10 +25,30 @@ class Game {
       При неправильном вводе символа - this.fail();
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
+    document.addEventListener('keyup', (event) => {
+      const enteredChar = event.key;
+
+      if (!this.currentSymbol) {
+
+        console.warn("currentSymbol не определен.");
+        return;
+      }
+        const expectedChar = this.currentSymbol.textContent;
+
+        if (enteredChar.toLowerCase() === expectedChar.toLowerCase()) {
+
+          this.success();
+        } else {
+          this.fail();
+        }
+      });
   }
 
   success() {
-    if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
+    if(this.currentSymbol && this.currentSymbol.classList.contains("symbol_current")) {
+      this.currentSymbol.classList.remove("symbol_current");
+      }
+
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
 
@@ -37,19 +57,30 @@ class Game {
       return;
     }
 
-    if (++this.winsElement.textContent === 10) {
+    const wins = parseInt(this.winsElement.textContent) + 1;
+    this.winsElement.textContent = wins;
+
+
+    if (wins === 10) {
       alert('Победа!');
       this.reset();
+    } else {
+      this.setNewWord();
     }
-    this.setNewWord();
   }
 
+
   fail() {
-    if (++this.lossElement.textContent === 5) {
+
+    const losses = parseInt(this.lossElement.textContent) + 1;
+    this.lossElement.textContent = losses;
+
+    if (losses === 3) {
       alert('Вы проиграли!');
       this.reset();
+    } else {
+      this.setNewWord();
     }
-    this.setNewWord();
   }
 
   setNewWord() {
@@ -70,7 +101,10 @@ class Game {
         'popcorn',
         'cinema',
         'love',
-        'javascript'
+        'javascript',
+        'я',
+        'люблю',
+        'kitkat'
       ],
       index = Math.floor(Math.random() * words.length);
 
