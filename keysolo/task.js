@@ -45,7 +45,7 @@ class Game {
   }
 
   success() {
-    if(this.currentSymbol && this.currentSymbol.classList.contains("symbol_current")) {
+    if (this.currentSymbol && this.currentSymbol.classList.contains("symbol_current")) {
       this.currentSymbol.classList.remove("symbol_current");
       }
 
